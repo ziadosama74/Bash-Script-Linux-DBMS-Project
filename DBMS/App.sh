@@ -94,7 +94,6 @@ function DropDB {
 #                  Connect to  Databases function
 # ---------------------------------------------------------------
 function ConnectDB {
-	#================ Not Impemented yet ================
 	 CheckDoneOperation="F"
          if ! ListAllDB; then
                 echo "--------------------------------"
