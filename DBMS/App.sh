@@ -1,4 +1,7 @@
 #!/bin/bash
+#========= The Project Path
+#--------------------------
+ProjectPath="$HOME"/DBMS
 echo " ======================================================="
 echo "             The Appliction File Interface              "
 echo " ======================================================="
@@ -10,9 +13,9 @@ function CreateDB {
 	if [ -z "$DBName" ]
 	then
 		echo "The Name of DB can not be empty"
-		return 1 # ===rm -r "$DB"
+		return 1 # ==== break the function
 	fi
-	for DB in "$HOME"/DBMS/*
+	for DB in "$ProjectPath"/*
 	do
 		if [ -d "$DB" ]
 		then
@@ -35,7 +38,7 @@ function ListAllDB {
 	echo " ------------------------------------------------------"
 	Index=1
 	FoundAny=1
-	for DB in "$HOME"/DBMS/*
+	for DB in "$ProjectPath"/*
 	do
 		if [ -d "$DB" ]
 		then
@@ -59,17 +62,17 @@ function DropDB {
                 echo "--------------------------------"
                 echo "    The System has no DB !!     "
                 echo "--------------------------------"
-                return 1
+                return 1 # break the function
 	 fi
          echo "--------------------------------"
-	 read -p "    Enter The Name Of DB :   " DBName
+	 read -p " Enter The Name Of DB to Drop it :   " DBName
 	 echo "--------------------------------"
 	 if [ -z "$DBName" ]
          then 
 		 echo "The Name of DB can not be empty !!"
 		 return 1
 	 else
-		 for DB in "$HOME"/DBMS/*
+		 for DB in "$ProjectPath"/*
 		 do
 			 if [ -d "$DB" ] && [ "$(basename "$DB")" = "$DBName" ]
 			 then
@@ -92,7 +95,43 @@ function DropDB {
 # ---------------------------------------------------------------
 function ConnectDB {
 	#================ Not Impemented yet ================
-        echo "Connect DB"
+	 CheckDoneOperation="F"
+         if ! ListAllDB; then
+                echo "--------------------------------"
+                echo "    The System has no DB !!     "
+                echo "--------------------------------"
+                return 1 # break the function
+         fi
+	 echo "--------------------------------------------"
+         read -p " Enter The Name Of DB to Connect with it :   " DBName
+         echo "--------------------------------------------"
+	 if [ -z "$DBName" ]
+         then
+                 echo "The Name of DB can not be empty !!"
+                 return 1
+         else
+                 for DB in "$ProjectPath"/*
+                 do
+                         if [ -d "$DB" ] && [ "$(basename "$DB")" = "$DBName" ]
+                         then
+                                 echo "== $DBName DB has been actually Found ;)"
+                                 CheckDoneOperation="T"
+                                 break
+                         fi
+                 done
+                        if [ "$CheckDoneOperation" = "F" ]
+                        then
+                                echo " -------------------------------------"
+                                echo " There Is NO DB With  $DBName Name !! "
+                                echo " -------------------------------------"
+			elif [ "$CheckDoneOperation" = "T" ] 
+			then
+				echo "== $DBName DB has been connected successfully ;)"
+				sleep 2
+				clear
+				./MenuUser.sh "$ProjectPath" "$DBName"
+                        fi
+          fi
 }
 
 # ===============================================================
@@ -100,13 +139,13 @@ function ConnectDB {
 # ===============================================================
 while true
 do
-	echo "============================"
+	echo "======================  APP Page =="
         echo "1) Create Database"
         echo "2) List Databases"
         echo "3) Connect To Database"
         echo "4) Drop Database"
         echo "5) Exit"
-        echo "============================"
+        echo "==================================="
 	read -p "  Choose The Option Number  " Choice
 	echo "----------------------------"
 	case $Choice in 
