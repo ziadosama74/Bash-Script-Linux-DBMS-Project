@@ -256,7 +256,7 @@ do
 	echo "6 ) Select From Table                                        "
 	echo "7 ) Delete From Table                                        "
 	echo "8 ) Alter Structure Table                                    "
-	echo "9 ) Exit                                                     "
+	echo "9 ) Back                                                     "
 	echo "======================================================       "
 	read -p "  Choose The Option Number  " Choice
 	case $Choice in
