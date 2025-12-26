@@ -104,16 +104,16 @@ function AddNewColumn {
         #   Update Existing Records : adding default value to the new col from the second line 2,$ from 2 the end
         #========================================================================================================
         if [ "$ColType" = "int" ]; then
-                sed -i '2,$s/$/0:/' "$TablePath"
+                sed -i '2,$s/$/NULL:/' "$TablePath"
 
         elif [ "$ColType" = "float" ]; then
-                sed -i '2,$s/$/0:/' "$TablePath"
+                sed -i '2,$s/$/NULL:/' "$TablePath"
 
         elif [ "$ColType" = "string" ]; then
-                sed -i '2,$s/$/0:/' "$TablePath"
+                sed -i '2,$s/$/NULL:/' "$TablePath"
 
         elif [ "$ColType" = "char" ]; then
-                sed -i '2,$s/$/0:/' "$TablePath"
+                sed -i '2,$s/$/NULL:/' "$TablePath"
         fi
 
 	echo " Column $ColName ($ColType) added successfully :)"
