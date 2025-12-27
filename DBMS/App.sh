@@ -1,8 +1,9 @@
 #!/bin/bash
 #========= The Project Path
 #--------------------------
-ProjectPath="$HOME"/DBMS
+ProjectPath="$HOME"/Bash-Script-Linux-DBMS-Project/DBMS
 clear
+echo "$ProjectPath"
 # ---------------------------------------------------------------
 #                     Create Database function
 # ---------------------------------------------------------------
@@ -24,7 +25,7 @@ function CreateDB {
 		       	fi
 		fi
 	done
-	mkdir -p "$HOME/DBMS/$DBName"
+	mkdir -p "$ProjectPath/$DBName"
 	echo "$DBName DB has been created successfully ;)"
 }
 # ---------------------------------------------------------------
