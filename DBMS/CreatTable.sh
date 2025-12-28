@@ -16,7 +16,7 @@ function AddNewColumn {
 	while true
 	do
 		clear
-		read -p " Enter Column Name:  " ColName
+		read -p " Enter Column Name :  " ColName
 		if [ -z "$ColName" ] 
 		then
 			echo " Column name cannot be empty !!"
@@ -142,7 +142,7 @@ do
 	echo "2) Back                      "
 	echo "============================="
 	echo "                             "
-	read -p " Enter The Option Number  " Choice
+	read -p " Enter The Option Number : " Choice
 	case $Choice in
 		1) clear
 			AddNewColumn

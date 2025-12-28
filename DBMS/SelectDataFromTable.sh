@@ -21,6 +21,9 @@ function SelectRows {
         case $ChoiceRows in
             1)
                 clear
+		echo "======================================"
+		echo "       $TableName Table Data          "
+		echo "======================================"
                 cat "$TablePath" | column -t -s ":"
                 read -p "Press Enter to continue..."
                 ;;
@@ -53,6 +56,9 @@ function SelectRows {
 
                 tmpfile=$(mktemp)
                 echo "$Header" > "$tmpfile"
+		echo "======================================"
+                echo "       $TableName Table Data          "
+                echo "======================================"
                 awk -F":" -v col="$ColNum" -v vals="${filter_vals[*]}" '
                 BEGIN { split(vals, arr, " ") }
                 NR>1 {
@@ -90,7 +96,7 @@ function SelectColumns {
         done
 
         echo "Available Columns: ${Columns[*]}"
-        echo "Enter column names separated by space (or 'back' to return):"
+        echo "Enter column names separated by space (or 'back' to return) :"
         read -a SelectedCols
 
         if [[ "${SelectedCols[0]}" == "back" ]]; then
@@ -117,13 +123,15 @@ function SelectColumns {
             read
             continue
         fi
+	echo "======================================"
+        echo "       $TableName Table Data          "
+        echo "======================================"
 
         {
             for idx in "${ColIndices[@]}"; do
                 printf "%s:" "$(echo "$Header" | cut -d: -f$idx)"
             done
             echo
-
             tail -n +2 "$TablePath" | while IFS=: read -r -a row; do
                 for idx in "${ColIndices[@]}"; do
                     printf "%s:" "${row[$((idx-1))]}"
@@ -137,7 +145,17 @@ function SelectColumns {
         return
     done
 }
+#---------------------------------------------------------------
+#                        Dispaly All Function
+#---------------------------------------------------------------
+function DisplayAll {
+	   echo "======================================"
+           echo "       $TableName Table Data          "
+           echo "======================================"
 
+	   cat "$TablePath" | column -t -s ":"
+           read -p "Press Enter to continue..."
+}
 #---------------------------------------------------------------
 #                            Main Menu
 #---------------------------------------------------------------
@@ -149,12 +167,11 @@ while true; do
     echo "3) Select Rows"
     echo "4) Back"
     echo "====================================================================="
-    read -p "Enter Option Number: " Choice
+    read -p "Enter Option Number : " Choice
     case $Choice in
         1)
             clear
-            cat "$TablePath" | column -t -s ":"
-            read -p "Press Enter to continue..."
+            DisplayAll
             ;;
         2)
             SelectColumns

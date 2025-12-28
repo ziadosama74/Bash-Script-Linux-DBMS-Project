@@ -36,7 +36,7 @@ function AddNewColumn {
 	while true
 	do
 		clear
-		read -p " Enter Column Name:  " ColName
+		read -p " Enter Column Name :  " ColName
 		if [ -z "$ColName" ]
 		then
 			echo " Column name cannot be empty !!"

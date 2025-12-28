@@ -150,7 +150,7 @@ do
 	echo "3) Back                     	    "
 	echo "======================================"
 	echo "                                      "
-	read -p " Enter The Option Number  " Choice
+	read -p " Enter The Option Number : " Choice
 	case $Choice in
 		1) clear
 			InsertData

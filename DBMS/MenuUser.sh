@@ -258,7 +258,7 @@ do
 	echo "8 ) Alter Structure Table                                    "
 	echo "9 ) Back                                                     "
 	echo "======================================================       "
-	read -p "  Choose The Option Number  " Choice
+	read -p "  Choose The Option Number : " Choice
 	case $Choice in
 		1) clear
 			CreateTable

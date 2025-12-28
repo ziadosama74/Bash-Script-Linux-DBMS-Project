@@ -57,6 +57,14 @@ function UpdateByPK {
 	echo "==========================================="
         echo "  Update Data Into $TableName Table By PK  "
         echo "==========================================="
+       	LinesCount=$(wc -l < "$TablePath")
+        if [ "$LinesCount" -le 1 ]
+	then
+	    echo "There's no Data to update it !! :( "
+	    sleep 3
+	    clear
+	    return 1
+	fi
         Header=$(head -n 1 "$TablePath")
         IFS=':' read -ra Columns <<< "$Header"
 	ColIndex=0
@@ -136,6 +144,14 @@ function UpdateByColumn {
 	echo "                                                        "
 	ListColumnsTable
 	echo "                                                        "
+       	LinesCount=$(wc -l < "$TablePath")
+        if [ "$LinesCount" -le 1 ]
+	then
+	    echo "There's no Data to update it !! :( "
+	    sleep 3
+	    clear
+	    return 1
+	fi
 	read -p "Enter The Column Name  :  " ColName
 	if [ -z "$ColName" ]
 	then

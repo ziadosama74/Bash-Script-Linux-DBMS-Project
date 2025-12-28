@@ -20,7 +20,7 @@ function DeleteFromTable {
         echo "3) Delete Rows By Column Value"
         echo "4) Back"
         echo "========================================================================="
-        read -p "Choose Option: " Choice
+        read -p "Choose Option : " Choice
 
         case $Choice in
 
@@ -40,7 +40,7 @@ function DeleteFromTable {
             clear
             Header=$(head -n 1 "$TablePath")
             echo "$Header" > "$TablePath"
-            echo "All rows deleted successfully ✅"
+            echo "All rows deleted successfully "
             sleep 2
             ;;
 
@@ -71,7 +71,7 @@ function DeleteFromTable {
     done
 
     if [[ $ColNum -eq 0 ]]; then
-        echo "Column not found ❌"
+        echo "Column not found "
         sleep 2
         continue
     fi
@@ -101,13 +101,13 @@ function DeleteFromTable {
 
     if [[ $? -eq 10 ]]; then
         rm "$TempFile"
-        echo "Value not found in column ❌"
+        echo "Value not found in column "
         sleep 2
         continue
     fi
 
     mv "$TempFile" "$TablePath"
-    echo "Rows deleted successfully ✅"
+    echo "Rows deleted successfully "
     sleep 2
     ;;
         #-------------------------------------------------------
@@ -118,7 +118,7 @@ function DeleteFromTable {
             ;;
 
         *)
-            echo "Invalid Option ❌"
+            echo "Invalid Option "
             sleep 2
             ;;
         esac

@@ -3,7 +3,6 @@
 #--------------------------
 ProjectPath="$HOME"/Bash-Script-Linux-DBMS-Project/DBMS
 clear
-echo "$ProjectPath"
 # ---------------------------------------------------------------
 #                     Create Database function
 # ---------------------------------------------------------------
@@ -144,7 +143,7 @@ do
         echo "4) Drop Database"
         echo "5) Exit"
         echo "==================================="
-	read -p "  Choose The Option Number  " Choice
+	read -p "  Choose The Option Number : " Choice
 	echo "----------------------------"
 	case $Choice in 
 		1) clear
