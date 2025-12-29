@@ -11,10 +11,10 @@ DBName="$3"
 #---------------------------------------------------------------
 function DisplayAll {
     echo "======================================"
-    echo "       $TableName Table Data          "
+    echo "       $TableName Table Data    📋    "
     echo "======================================"
     cat "$TablePath" | column -t -s ":"
-    read -p "Press Enter to continue..."
+    read -p "Press Enter to continue...😉"
 }
 
 #---------------------------------------------------------------
@@ -23,7 +23,7 @@ function DisplayAll {
 function DeleteRows {
     while true; do
         clear
-        echo "=========================== ( $DBName DB - $TableName Table ) ====="
+        echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
         echo "1) Delete All Rows"
         echo "2) Delete Rows By Column Values"
         echo "3) Back"
@@ -35,7 +35,7 @@ function DeleteRows {
                 clear
                 Header=$(head -n 1 "$TablePath")
                 echo "$Header" > "$TablePath"
-                echo "All rows deleted successfully."
+                echo "All rows deleted successfully ✅😉"
                 sleep 2
                 ;;
             2)
@@ -47,7 +47,7 @@ function DeleteRows {
                     Columns+=("$(echo "$col" | sed 's/(.*)//')")
                 done
 
-                echo "Available Columns: ${Columns[*]}"
+                echo "Available Columns  📊  : ${Columns[*]}"
                 read -p "Enter column name to delete by: " DelCol
                 read -p "Enter values separated by space: " -a DelVals
 
@@ -60,7 +60,7 @@ function DeleteRows {
                 done
 
                 if [[ $ColNum -eq 0 ]]; then
-                    echo "Column '$DelCol' not found!"
+                    echo "Column '$DelCol' not found ❗🙁"
                     sleep 2
                     continue
                 fi
@@ -78,14 +78,14 @@ function DeleteRows {
                 }' "$TablePath" >> "$tmpfile"
 
                 mv "$tmpfile" "$TablePath"
-                echo "Rows deleted successfully."
+                echo "Rows deleted successfully ✅😉"
                 sleep 2
                 ;;
             3)
                 break
                 ;;
             *)
-                echo "Invalid option!"
+                echo "Invalid option ❌"
                 sleep 2
                 ;;
         esac
@@ -97,7 +97,7 @@ function DeleteRows {
 #---------------------------------------------------------------
 while true; do
     clear
-    echo "=========================== ( $DBName DB - $TableName Table ) ====="
+    echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
     echo "1) Display Table"
     echo "2) Delete Rows"
     echo "3) Back"
@@ -118,8 +118,8 @@ while true; do
             ;;
         *)
             clear
-            echo "Invalid Option !!"
-            sleep 2
+            echo "Invalid Option ❌"
+            sleep 1
             ;;
     esac
 done

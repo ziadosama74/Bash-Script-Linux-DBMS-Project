@@ -19,21 +19,21 @@ function AddNewColumn {
 		read -p " Enter Column Name :  " ColName
 		if [ -z "$ColName" ] 
 		then
-			echo " Column name cannot be empty !!"
+			echo " Column name cannot be empty ❗🙁"
 		else
 			#=============================================
 			if [[ "$ColName" == +([0-9]) ]]
                         then
-                                echo " Column name cannot be numeric !!"
+                                echo " Column name cannot be numeric ❌🙁"
                         elif [[ "$ColName" =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]
                         then
                                 if echo "$Header" | grep -q "$ColName("; then  #=== Search if the col is matched wit other or not
-					echo "$ColName Column already exists inside $TableName Table !!"
+					echo "$ColName Column already exists inside $TableName Table ❗🙁"
 				else
 					break #=== The validation is true done :) now I have Valid ColName
 				fi
 			else
-				echo " Invalid column name format !!"
+				echo " Invalid column name format ❌🙁"
                         fi
 		fi
 		sleep 2
@@ -51,7 +51,7 @@ function AddNewColumn {
 		echo "2) float"
 		echo "3) string"
 		echo "4) char"
-		echo "5) cancel the process :( "
+		echo "5) cancel the process ❌ "
 		echo "===================================="
 		read -p "Choose the Option Number : " Choise
 		case $Choise in
@@ -69,7 +69,7 @@ function AddNewColumn {
 				;;
 			5) return 1
 				;;
-			*) echo "Invalid Option !! "
+			*) echo "Invalid Option ❌🙁 "
 				;;
 		esac
 	done
@@ -96,36 +96,36 @@ function AddNewColumn {
                 sed -i '2,$s/$/NULL:/' "$TablePath"
         fi
 
-	echo " Column $ColName ($ColType) added successfully :)"
+	echo " Column $ColName ($ColType) added successfully ✅😉"
         sleep 3
 }
 
 #---------------------------------------------------------------
 #                            Set The PK
 #---------------------------------------------------------------
-echo "=========================== ( $DBName DB - $TableName Table ) ====="
+echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
 echo "                                                                   "
 while true
 do
 	read -p "Enter The PK Column Name Of ( $TableName Table ) :   " PKCOL
 	if [ -z "$PKCOL" ]
 	then
-		echo "The PK can not be empty !! "
+		echo "The PK can not be empty ❗🙁"
 	else
 		if [[ $PKCOL == +([0-9]) ]]
 		then
-			echo "The PK Name can not be numeric !! "
+			echo "The PK Name can not be numeric ❌🙁"
 		elif [[ $PKCOL == +([A-Za-z]) ]]
 		then
 			echo "$PKCOL(int):" >> "$TablePath"
-			echo "$PKCOL PK has been created in $TableName Table :) "
+			echo "$PKCOL PK has been created in $TableName Table ✅😉"
 			sleep 3
 			break
 	       	fi
 	fi
 	sleep 2
 	clear
-	echo "=========================== ( $DBName DB - $TableName Table ) ====="
+	echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
         echo "                                                                   "
 done
 clear
@@ -135,7 +135,7 @@ clear
 while true
 do
 	clear
-	echo "=========================== ( $DBName DB - $TableName Table ) ====="
+	echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
 	echo "                                                                   "
 	echo "============================="
 	echo "1) Add New Column            "
@@ -151,7 +151,7 @@ do
 			exit 1
 			;;
 		*) clear
-			echo "Invalid Option !! "
+			echo "Invalid Option ❌🙁"
 			;;
 	esac
 

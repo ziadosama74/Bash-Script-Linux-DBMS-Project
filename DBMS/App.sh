@@ -10,7 +10,7 @@ function CreateDB {
 	read -p "Enter The Name Of New Database : " DBName
 	if [ -z "$DBName" ]
 	then
-		echo "The Name of DB can not be empty"
+		echo "The Name of DB can not be empty ❗🙁"
 		return 1 # ==== break the function
 	fi
 	for DB in "$ProjectPath"/*
@@ -19,13 +19,13 @@ function CreateDB {
 		then
 		       	if [ "$(basename "$DB")" = "$DBName" ]
 			then
-				echo "$DBName this name can not be accepted !! :("
+				echo "$DBName this name can not be accepted ❌🙁"
 				return 1 # =====> break the function  
 		       	fi
 		fi
 	done
 	mkdir -p "$ProjectPath/$DBName"
-	echo "$DBName DB has been created successfully ;)"
+	echo "$DBName DB has been created successfully ✅😉"
 }
 # ---------------------------------------------------------------
 #                     List All  Databases function
@@ -40,14 +40,14 @@ function ListAllDB {
 	do
 		if [ -d "$DB" ]
 		then
-			echo "=== $Index ) $(basename "$DB") DB "
+			echo "=== $Index ) 🗂️  $(basename "  $DB") "
 			((Index++))
 			FoundAny=0
 		fi
 	done
 	if [ "$FoundAny" -eq 1 ]
 	then
-		echo "No Database Found :( "
+		echo "No Database Found ❗🙁"
 	fi
 	return $FoundAny
 }
@@ -58,7 +58,7 @@ function DropDB {
 	CheckDoneOperation="F"
 	 if ! ListAllDB; then
                 echo "--------------------------------"
-                echo "    The System has no DB !!     "
+                echo "    The System has no DB ❗🙁   "
                 echo "--------------------------------"
                 return 1 # break the function
 	 fi
@@ -67,7 +67,7 @@ function DropDB {
 	 echo "--------------------------------"
 	 if [ -z "$DBName" ]
          then 
-		 echo "The Name of DB can not be empty !!"
+		 echo "The Name of DB can not be empty ❗🙁"
 		 return 1
 	 else
 		 for DB in "$ProjectPath"/*
@@ -75,16 +75,16 @@ function DropDB {
 			 if [ -d "$DB" ] && [ "$(basename "$DB")" = "$DBName" ]
 			 then
 				 rm -r "$DB"
-				 echo "== $DBName DB has been dropped successfully ;)"
+				 echo "== $DBName 🗂️  has been dropped successfully ✅😉"
 				 CheckDoneOperation="T"
 				 break
 			 fi
 		 done
 			if [ "$CheckDoneOperation" = "F" ]
 			then
-				echo " -------------------------------------"
-				echo " There Is NO DB With  $DBName Name !! "
-				echo " -------------------------------------"
+				echo " --------------------------------------"
+				echo " There Is NO DB With  $DBName Name ❗🙁"
+				echo " --------------------------------------"
 			fi
 	  fi
 }
@@ -95,7 +95,7 @@ function ConnectDB {
 	 CheckDoneOperation="F"
          if ! ListAllDB; then
                 echo "--------------------------------"
-                echo "    The System has no DB !!     "
+                echo "    The System has no DB ❗🙁   "
                 echo "--------------------------------"
                 return 1 # break the function
          fi
@@ -104,14 +104,14 @@ function ConnectDB {
          echo "--------------------------------------------"
 	 if [ -z "$DBName" ]
          then
-                 echo "The Name of DB can not be empty !!"
+                 echo "The Name of DB can not be empty ❗🙁"
                  return 1
          else
                  for DB in "$ProjectPath"/*
                  do
                          if [ -d "$DB" ] && [ "$(basename "$DB")" = "$DBName" ]
                          then
-                                 echo "== $DBName DB has been actually Found ;)"
+                                 echo "== $DBName DB has been actually Found ✅"
                                  CheckDoneOperation="T"
                                  break
                          fi
@@ -119,11 +119,11 @@ function ConnectDB {
                         if [ "$CheckDoneOperation" = "F" ]
                         then
                                 echo " -------------------------------------"
-                                echo " There Is NO DB With  $DBName Name !! "
+                                echo " There Is NO DB With  $DBName Name ❗🙁 "
                                 echo " -------------------------------------"
 			elif [ "$CheckDoneOperation" = "T" ] 
 			then
-				echo "== $DBName DB has been connected successfully ;)"
+				echo "== $DBName DB has been connected successfully 😉"
 				sleep 2
 				clear
 				./MenuUser.sh "$ProjectPath" "$DBName"
@@ -132,11 +132,47 @@ function ConnectDB {
 }
 
 # ===============================================================
+#                    Display The App
+# ===============================================================
+chars=(W E L C O M E " " T O " " O U R " " B A S H " " S C R I P T " " P R O J E C T 🐧" " D B M S  🗂️" " )
+Names=(I M P L E M E N T E D " " B Y " "
+Z I A D " " O S A M A 👷 " " "&" " "
+Y O S S E F " " A M G A D   👷 " " )
+echo -n "    "
+for (( i=0 ; i<= 50 ; i++ ))
+do
+	echo -n "="
+	sleep 0.03
+done
+echo " "
+echo -n "       "
+for ch in "${chars[@]}"
+do
+    echo -n "$ch"
+    sleep 0.03
+done
+echo " "
+echo -n "       "
+for NA in "${Names[@]}"
+do
+    echo -n "$NA"
+    sleep 0.03
+done
+echo " "
+echo -n "    "
+for (( i=0 ; i<= 50 ; i++ ))
+do
+	echo -n "="
+	sleep 0.03
+done
+echo " "
+# ===============================================================
 #                     The Main Menu Of The App
 # ===============================================================
 while true
 do
-	echo "======================  APP Page =="
+	echo " "
+	echo "====================== APP Page📱 =="
         echo "1) Create Database"
         echo "2) List Databases"
         echo "3) Connect To Database"
@@ -166,12 +202,13 @@ do
 			echo "Good Bye "
 		       	for (( i=1 ; i<=3 ; i++ ))
 			do
-				echo "       :( "
+				echo "       🙁👋"
 				sleep 1
 			done
 			exit 0
 			;;
-		*) echo " ===   Sorry Invalid Option :( "
+		*) clear
+			echo " ===   Sorry Invalid Option ❌🙁"
 			;;
 	esac
 done

@@ -32,17 +32,17 @@ function CreateTable {
 	echo " ----------------------      "
 	read -p " Enter The Table Name :   " TableName
 	echo " ----------------------      "
-	[ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+	[ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
 	if TableIsFound "$TableName"; then
 		echo " ---------------------------------"
-		echo " $TableName is not Accepted !!  :("
+		echo " $TableName is not Accepted   ❌🙁"
 		echo " ---------------------------------"
 		sleep 2
 		clear
 	else
 		touch  "$DBPath/$TableName"
 		echo " -------------------------------------------"
-		echo " $TableName has been created successfully ;)"
+		echo " $TableName has been created successfully  ✅😉"
 		echo " -------------------------------------------"
 		sleep 2
 		clear
@@ -58,7 +58,7 @@ function CreateTable {
 #----------------------------------------------------------------
 function ListAllTable {
 	 echo "--------------------------------------"
-	 echo "   Tables in Database: $DBName        "
+	 echo "   Tables in Database: $DBName    🗂️  "
 	 echo "--------------------------------------"
 	 Index=1
 	 FoundAny=0
@@ -66,14 +66,14 @@ function ListAllTable {
  	 do
  		 if [ -f "$Table" ]
 		 then
-			 echo " $Index ) $(basename "$Table")"
+			 echo " $Index ) 📋  $(basename "$Table")"
 			 ((Index++))
 			 FoundAny=1
 		 fi
  	 done
 	 if [ "$FoundAny" -eq 0 ]
 	 then
-		  echo " No Tables Found   :( "
+		  echo " No Tables Found   ❗🙁 "
 		  sleep 2
 		  return 1
 	 fi
@@ -85,19 +85,19 @@ function ListAllTable {
 #----------------------------------------------------------------
 function DropTable {
 	if ! ListAllTable; then
-                echo " No Tables to Drop !!"
+                echo " No Tables to Drop  ❗🙁"
 		sleep 2
                 return 1
         fi
         echo " ----------------------------------- "
         read -p " Enter The Table Name to Drop it :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
 	if TableIsFound "$TableName"; then
 		rm "$DBPath/$TableName"
-		echo " $TableName has been dropped successfullly  :)"
+		echo " $TableName has been dropped successfullly  ✅😉"
                 echo " ---------------------------------------------"
         else
-		echo " $TableName Is Not Existed "
+		echo " $TableName Is Not Existed  ❗🙁"
         fi
 	sleep 2
 	clear
@@ -107,16 +107,16 @@ function DropTable {
 #----------------------------------------------------------------
 function InsertDataAtTable {
 	if ! ListAllTable; then
-                echo " No Tables to Insert Data Into !!"
+                echo " No Tables to Insert Data Into ❗🙁"
                 sleep 2
                 return 1
         fi
 	echo " ----------------------------------- "
         read -p " Enter The Table Name to Insert Data inside it :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
 	if TableIsFound "$TableName"; then
                
-                echo " Now You Are Accessing $TableName Table  :)"
+                echo " Now You Are Accessing $TableName Table  ✅"
                 sleep 2
 		clear
 		# Open Insert Data into table Scipt file
@@ -124,7 +124,7 @@ function InsertDataAtTable {
                 ./InsertDataInTable.sh "$DBPath/$TableName" "$TableName" "$DBName"
 
         else
-                echo " $TableName Is Not Existed "
+                echo " $TableName Is Not Existed ❗🙁"
         fi
         sleep 2
         clear
@@ -135,16 +135,16 @@ function InsertDataAtTable {
 #----------------------------------------------------------------
 function UpdateDataAtTable {
         if ! ListAllTable; then
-                echo " No Tables to Update Data Into !!"
+                echo " No Tables to Update Data Into ❗🙁"
                 sleep 2
                 return 1
         fi
         echo " ----------------------------------- "
         read -p " Enter The Table Name to Update Data inside it :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
         if TableIsFound "$TableName"; then
 
-                echo " Now You Are Accessing $TableName Table  :)"
+                echo " Now You Are Accessing $TableName Table  ✅"
                 sleep 2
                 clear
                 # Open Update Data into table Scipt file
@@ -152,7 +152,7 @@ function UpdateDataAtTable {
                 ./UpdateDataInTable.sh "$DBPath/$TableName" "$TableName" "$DBName"
 
         else
-                echo " $TableName Is Not Existed "
+                echo " $TableName Is Not Existed ❗🙁"
         fi
         sleep 2
         clear
@@ -163,16 +163,16 @@ function UpdateDataAtTable {
 #----------------------------------------------------------------
 function SelectFromTable {
         if ! ListAllTable; then
-                echo " No Tables to Retrive Data from it !!"
+                echo " No Tables to Retrive Data from it ❗🙁"
                 sleep 2
                 return 1
         fi
         echo " ----------------------------------- "
         read -p " Enter The Table Name to Retrive the Data from it :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
         if TableIsFound "$TableName"; then
 
-                echo " Now You Are Accessing $TableName Table  :)"
+                echo " Now You Are Accessing $TableName Table  ✅"
                 sleep 2
                 clear
                 # Open Select Data from  table Scipt file
@@ -180,7 +180,7 @@ function SelectFromTable {
                 ./SelectDataFromTable.sh "$DBPath/$TableName" "$TableName" "$DBName"
 
         else
-                echo " $TableName Is Not Existed "
+                echo " $TableName Is Not Existed ❗🙁"
         fi
         sleep 2
         clear
@@ -191,16 +191,16 @@ function SelectFromTable {
 #----------------------------------------------------------------
 function DeleteFromTable {
         if ! ListAllTable; then
-                echo " No Tables to Delete Data from it !!"
+                echo " No Tables to Delete Data from it ❗🙁"
                 sleep 2
                 return 1
         fi
         echo " ----------------------------------- "
         read -p " Enter The Table Name to Delete Data from it :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
         if TableIsFound "$TableName"; then
 
-                echo " Now You Are Accessing $TableName Table  :)"
+                echo " Now You Are Accessing $TableName Table  ✅"
                 sleep 2
                 clear
                 # Open Delete Data from table Scipt file
@@ -208,7 +208,7 @@ function DeleteFromTable {
                 ./DeleteDataFromTable.sh "$DBPath/$TableName" "$TableName" "$DBName"
 
         else
-                echo " $TableName Is Not Existed "
+                echo " $TableName Is Not Existed ❗🙁"
         fi
         sleep 2
         clear
@@ -225,10 +225,10 @@ function AlterTable {
         fi
         echo " ----------------------------------- "
         read -p " Enter The Table Name to Modify it's Structure :   " TableName
-        [ -z "$TableName" ] && echo " Table name cannot be empty :(" && sleep 2 && clear && return 1 # Can not accept the empty file
+        [ -z "$TableName" ] && echo " Table name cannot be empty ❗🙁" && sleep 2 && clear && return 1 # Can not accept the empty file
         if TableIsFound "$TableName"; then
 
-                echo " Now You Are Accessing $TableName Table  :)"
+                echo " Now You Are Accessing $TableName Table  ✅"
                 sleep 2
                 clear
                 # Open Alter table Scipt file
@@ -236,7 +236,7 @@ function AlterTable {
                 ./AlterStructureTable.sh "$DBPath/$TableName" "$TableName" "$DBName"
 
         else
-                echo " $TableName Is Not Existed "
+                echo " $TableName Is Not Existed ❗🙁"
         fi
         sleep 2
         clear
@@ -247,7 +247,7 @@ function AlterTable {
 #================================================================
 while true
 do
-	echo "================================ DB Page ( $DBName DB ) ==== "
+	echo "====================== DB Page ( $DBName DB  🗂️   ) ==== "
 	echo "1 ) Create New Table                                         "
 	echo "2 ) List All Tables                                          "
 	echo "3 ) Drop Table                                               "
@@ -288,7 +288,7 @@ do
 		       	exit 1
 			;;
 		*) clear
-		       	echo "Invalid Option"
+		       	echo "Invalid Option ❌"
 			;;
 	esac
 done

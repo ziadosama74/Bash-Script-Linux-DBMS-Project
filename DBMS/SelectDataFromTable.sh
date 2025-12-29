@@ -11,7 +11,7 @@ DBName="$3"
 function SelectRows {
     while true; do
         clear
-        echo "=========================== ( $DBName DB - $TableName Table ) ====="
+        echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
         echo "1) Display All Rows"
         echo "2) Display Rows By Column Values"
         echo "3) Back"
@@ -22,10 +22,10 @@ function SelectRows {
             1)
                 clear
 		echo "======================================"
-		echo "       $TableName Table Data          "
-		echo "======================================"
+        	echo "       $TableName Table Data    📋    "
+        	echo "======================================"
                 cat "$TablePath" | column -t -s ":"
-                read -p "Press Enter to continue..."
+                read -p "Press Enter to continue...😉"
                 ;;
             2)
                 clear
@@ -49,16 +49,16 @@ function SelectRows {
                 done
 
                 if [[ $ColNum -eq 0 ]]; then
-                    echo "Column '$filter_col' not found!"
-                    read -p "Press Enter to continue..."
+                    echo "Column '$filter_col' not found ❗🙁"
+                    read -p "Press Enter to continue...😉"
                     continue
                 fi
 
                 tmpfile=$(mktemp)
                 echo "$Header" > "$tmpfile"
 		echo "======================================"
-                echo "       $TableName Table Data          "
-                echo "======================================"
+        	echo "       $TableName Table Data    📋    "
+        	echo "======================================"
                 awk -F":" -v col="$ColNum" -v vals="${filter_vals[*]}" '
                 BEGIN { split(vals, arr, " ") }
                 NR>1 {
@@ -70,13 +70,13 @@ function SelectRows {
                 column -t -s ":" "$tmpfile"
                 rm "$tmpfile"
 
-                read -p "Press Enter to continue..."
+                read -p "Press Enter to continue...😉"
                 ;;
             3)
                 break
                 ;;
             *)
-                echo "Invalid option!"
+                echo "Invalid option ❌"
                 sleep 2
                 ;;
         esac
@@ -95,7 +95,7 @@ function SelectColumns {
             Columns+=("$(echo "$col" | sed 's/(.*)//')")
         done
 
-        echo "Available Columns: ${Columns[*]}"
+        echo "Available Columns  📊  : ${Columns[*]}"
         echo "Enter column names separated by space (or 'back' to return) :"
         read -a SelectedCols
 
@@ -114,17 +114,17 @@ function SelectColumns {
                 fi
             done
             if [[ $found -eq 0 ]]; then
-                echo "Column '$user_col' not found."
+                echo "Column '$user_col' not found. ❗🙁"
             fi
         done
 
         if [[ ${#ColIndices[@]} -eq 0 ]]; then
-            echo "No valid columns selected. Press Enter to try again."
+            echo "No valid columns selected. Press Enter to try again. ❌🙁"
             read
             continue
         fi
 	echo "======================================"
-        echo "       $TableName Table Data          "
+        echo "       $TableName Table Data    📋    "
         echo "======================================"
 
         {
@@ -141,7 +141,7 @@ function SelectColumns {
         } | sed 's/:$//' | column -t -s ":"
 
         echo
-        read -p "Press Enter to continue..."
+        read -p "Press Enter to continue...😉"
         return
     done
 }
@@ -150,18 +150,18 @@ function SelectColumns {
 #---------------------------------------------------------------
 function DisplayAll {
 	   echo "======================================"
-           echo "       $TableName Table Data          "
+           echo "       $TableName Table Data    📋    "
            echo "======================================"
 
 	   cat "$TablePath" | column -t -s ":"
-           read -p "Press Enter to continue..."
+           read -p "Press Enter to continue...😉"
 }
 #---------------------------------------------------------------
 #                            Main Menu
 #---------------------------------------------------------------
 while true; do
     clear
-    echo "=========================== ( $DBName DB - $TableName Table ) ====="
+    echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
     echo "1) Select All Columns"
     echo "2) Select Specific Columns"
     echo "3) Select Rows"
@@ -173,10 +173,10 @@ while true; do
             clear
             DisplayAll
             ;;
-        2)
+        2) clear
             SelectColumns
             ;;
-        3)
+        3) clear
             SelectRows
             ;;
         4)
@@ -185,7 +185,7 @@ while true; do
             ;;
         *)
             clear
-            echo "Invalid Option !!"
+            echo "Invalid Option ❌"
             sleep 2
             ;;
     esac

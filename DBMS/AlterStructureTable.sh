@@ -9,7 +9,7 @@ ColumnNamesClean=() #== Store the names of column without the Data type
 function ListColumnsTable {
 	Header=$(head -n 1 "$TablePath")        #====  this Header has all columns of the table
 	IFS=':' read -ra Columns <<< "$Header"  #==== store each filed in array & remove (:)
-	echo "=== Columns of $TableName Table ==="
+	echo "=== Columns of $TableName Table  📊 ==="
 	echo "                                   "
 	Index=1
 	ColumnNamesClean=()   #== reset global array
@@ -19,7 +19,7 @@ function ListColumnsTable {
                 ColName="${col%%(*}"
 		# Store in global array
                 ColumnNamesClean+=("$ColName")
-		echo "Col $Index) $col"
+		echo "Col $Index) 📊  $col"
 		((Index++))
 	done
 
@@ -39,21 +39,21 @@ function AddNewColumn {
 		read -p " Enter Column Name :  " ColName
 		if [ -z "$ColName" ]
 		then
-			echo " Column name cannot be empty !!"
+			echo " Column name cannot be empty ❗🙁"
 		else
 			#=============================================
 			if [[ "$ColName" == +([0-9]) ]]
                         then
-                                echo " Column name cannot be numeric !!"
+                                echo " Column name cannot be numeric ❌🙁"
                         elif [[ "$ColName" =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]
                         then
                                 if echo "$Header" | grep -q "$ColName("; then  #=== Search if the col is matched wit other or not
-					echo "$ColName Column already exists inside $TableName Table !!"
+					echo "$ColName Column already exists inside $TableName Table ❗🙁"
 				else
 					break #=== The validation is true done :) now I have Valid ColName
 				fi
 			else
-				echo " Invalid column name format !!"
+				echo " Invalid column name format ❌🙁"
                         fi
 		fi
 		sleep 2
@@ -71,7 +71,7 @@ function AddNewColumn {
 		echo "2) float"
 		echo "3) string"
 		echo "4) char"
-		echo "5) cancel the process :( "
+		echo "5) cancel the process ❌ "
 		echo "===================================="
 		read -p "Choose the Option Number : " Choise
 		case $Choise in
@@ -89,7 +89,7 @@ function AddNewColumn {
 				;;
 			5) return 1
 				;;
-			*) echo "Invalid Option !! "
+			*) echo "Invalid Option ❌ "
 				;;
 		esac
 	done
@@ -116,7 +116,7 @@ function AddNewColumn {
                 sed -i '2,$s/$/NULL:/' "$TablePath"
         fi
 
-	echo " Column $ColName ($ColType) added successfully :)"
+	echo " Column $ColName ($ColType) added successfully ✅😉"
         sleep 3
 }
 #---------------------------------------------------------------
@@ -128,7 +128,7 @@ function DropColumn {
 	read -p "Enter The Column Name to Drop it :   " ColName
 	if [ -z "$ColName" ]
 	then
-		echo "Column Name Cannot be empty !!"
+		echo "Column Name Cannot be empty ❗🙁"
 		sleep 2
 		return 1
 	else
@@ -141,7 +141,7 @@ function DropColumn {
 			then
 				if [ "$ColIndex" -eq 1 ]
 				then
-					echo "You cannot drop the PK Colum ( $Col ) "
+					echo "You cannot drop the PK Colum ( $Col )  ❌🙁"
 					return 1
 				fi
 				Found=1
@@ -159,13 +159,13 @@ function DropColumn {
                                         }
                                         printf "\n"
                                 }' "$TablePath" > "$TablePath.tmp" && mv "$TablePath.tmp" "$TablePath"
-				echo "Column $ColName has been dropped successfully :)"
+				echo "Column $ColName has been dropped successfully ✅😉"
 				sleep 3
 				return 0
 			fi
 		done
 	fi
-	echo "$ColName Column is not Found in $TableName Table :("
+	echo "$ColName Column is not Found in $TableName Table ❗🙁"
 	sleep 2
 	return 1
 
@@ -179,7 +179,7 @@ function AlterColumn {
         read -p "Enter The Column Name to Alter it :   " ColName
 
         if [ -z "$ColName" ]; then
-                echo "Column Name Cannot be empty !!"
+                echo "Column Name Cannot be empty ❗🙁"
                 sleep 2
                 return 1
         fi
@@ -196,7 +196,7 @@ function AlterColumn {
                                 read -p "Enter the new name of $Col (PK) : " NewColName
 
                                 if [ -z "$NewColName" ]; then
-                                        echo " New column name cannot be empty !!"
+                                        echo " New column name cannot be empty ❗🙁"
                                         sleep 2
                                         return 1
                                 fi
@@ -204,7 +204,7 @@ function AlterColumn {
                                 # replace only in first line (header)
                                 sed -i "1s/\b$Col\b/$NewColName/" "$TablePath"
 
-                                echo "The PK Column has been renamed from $Col to $NewColName successfully :)"
+                                echo "The PK Column has been renamed from $Col to $NewColName successfully ✅😉"
                                 sleep 3
                                 return 0
                         fi
@@ -213,20 +213,20 @@ function AlterColumn {
                         read -p "Enter the new name of $Col : " NewColName
 
                         if [ -z "$NewColName" ]; then
-                                echo " New column name cannot be empty !!"
+                                echo " New column name cannot be empty ❗🙁"
                                 sleep 2
                                 return 1
                         fi
 
                         sed -i "1s/\b$Col\b/$NewColName/" "$TablePath"
 
-                        echo "Column $Col has been renamed to $NewColName successfully :)"
+                        echo "Column $Col has been renamed to $NewColName successfully ✅😉"
                         sleep 3
                         return 0
                 fi
         done
 
-        echo "$ColName Column is not Found in $TableName Table :("
+        echo "$ColName Column is not Found in $TableName Table ❗🙁"
         sleep 2
         return 1
 }
@@ -235,7 +235,7 @@ function AlterColumn {
 #--------------------------------------------------------------------------
 while true
 do
-	echo "=========================== ( $DBName DB - $TableName Table ) ====="
+	echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
 	echo "                                                                   "
 	echo "==================================="
 	echo "1) Add New Column                  "
@@ -263,7 +263,7 @@ do
 			exit 1
 			;;
 		*) clear
-			echo "Invalid Option !! "
+			echo "Invalid Option ❌"
 			;;
 	esac
 

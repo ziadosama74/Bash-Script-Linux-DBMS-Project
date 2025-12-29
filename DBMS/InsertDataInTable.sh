@@ -10,7 +10,7 @@ ColumnNamesClean=() #== Store the names of column without the Data type
 function ListColumnsTable {
 	Header=$(head -n 1 "$TablePath")        #====  this Header has all columns of the table
 	IFS=':' read -ra Columns <<< "$Header"  #==== store each filed in array & remove (:)
-	echo "=== Columns of $TableName Table ==="
+	echo "=== Columns of $TableName Table  📊 ==="
 	echo "                                   "
 	Index=1
 	ColumnNamesClean=()   #== reset global array
@@ -54,9 +54,9 @@ function CheckDataType {
 #              Insert Data into the Table Function
 #--------------------------------------------------------------------------
 function InsertData {
-    echo "====================================="
-    echo "  Insert Data Into $TableName Table  "
-    echo "====================================="
+    echo "======================================="
+    echo "  Insert Data Into $TableName Table  📋"
+    echo "======================================="
 
     Header=$(head -n 1 "$TablePath")
     IFS=':' read -ra Columns <<< "$Header"
@@ -76,17 +76,17 @@ function InsertData {
             do
                 read -p "Enter value for PRIMARY KEY [$ColName][$ColType] : " Data
 
-                [ -z "$Data" ] && echo "PK cannot be empty !!" && continue
+                [ -z "$Data" ] && echo "PK cannot be empty ❗🙁" && continue
 
                 Type=$(CheckDataType "$Data")
                 if [ "$Type" != "$ColType" ]; then
-                    echo "Invalid Data Type !! Expected $ColType"
+                    echo "Invalid Data Type ❌🙁 Expected $ColType"
                     continue
                 fi
 
                 # Check uniqueness (first column only)
                 if cut -d':' -f1 "$TablePath" | grep -qx "$Data"; then
-                    echo "Primary Key must be UNIQUE !!"
+                    echo "Primary Key must be UNIQUE ❗🙁"
                     continue
                 fi
 
@@ -101,15 +101,13 @@ function InsertData {
 		    read -p "Insert data into [$ColName][$ColType] ? [Y/N] : " Choice
 
 		    if [ "$Choice" = "Y" ]; then
-
-			# loop لإدخال القيمة
 			while true
 			do
 			    read -p "Enter value for $ColName : " Data
 
 			    Type=$(CheckDataType "$Data")
 			    if [ "$Type" != "$ColType" ]; then
-				echo "Invalid Data Type !! Expected $ColType"
+				echo "Invalid Data Type ❌🙁 Expected $ColType"
 			    else
 				RowData="$RowData:$Data"
 				break 2 # break from all loops
@@ -121,7 +119,7 @@ function InsertData {
 			break
 
 		    else
-			echo "Invalid Choice !! Please enter Y or N"
+			echo "Invalid Choice ❌ Please enter Y or N"
 			continue
 		    fi
 	   done
@@ -130,7 +128,8 @@ function InsertData {
     done
 
     echo "$RowData:" >> "$TablePath"
-    echo "Record inserted successfully :)"
+    clear
+    echo "Record inserted successfully ✅😉"
 }
 
 
@@ -142,7 +141,7 @@ function InsertData {
 #--------------------------------------------------------------------------
 while true 
 do
-	echo "=========================== ( $DBName DB - $TableName Table ) ====="
+	echo "=========================== ( $DBName 🗂️  - $TableName Table  📋 ) ====="
 	echo "                                                                   "
 	echo "======================================"
 	echo "1) Insert Data into $TableName Table  "
@@ -162,7 +161,7 @@ do
 			exit 1
 			;;
 		*) clear
-			echo "Invalid Option"
+			echo "Invalid Option ❌"
 			;;
 	esac	
 
