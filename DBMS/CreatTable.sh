@@ -10,7 +10,7 @@ DBName="$3"
 function AddNewColumn {
 	ColName=""
         ColType=""
-	Header=$(head -n 1 "$TablePath")     #====  this Header has all columns of the table
+	Header=$(head -n 1 "$TablePath")     
         NewHeader=""
 
 	while true
@@ -20,6 +20,10 @@ function AddNewColumn {
 		if [ -z "$ColName" ] 
 		then
 			echo " Column name cannot be empty ❗🙁"
+		elif [[ "$ColName" == *"*"* ]]
+		then
+			echo "$ColName this name can not be accepted ❌🙁"
+			return 1
 		else
 			#=============================================
 			if [[ "$ColName" == +([0-9]) ]]
@@ -36,7 +40,7 @@ function AddNewColumn {
 				echo " Invalid column name format ❌🙁"
                         fi
 		fi
-		sleep 2
+		sleep 1
 	done
 	#=======================================
 	#      Select the Data type            
@@ -148,7 +152,7 @@ do
 			AddNewColumn
 			;;
 		2) clear
-			exit 1
+			exit 0
 			;;
 		*) clear
 			echo "Invalid Option ❌🙁"

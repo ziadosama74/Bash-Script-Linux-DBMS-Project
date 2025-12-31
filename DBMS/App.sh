@@ -1,6 +1,5 @@
 #!/bin/bash
-#========= The Project Path
-#--------------------------
+shopt -s extglob
 ProjectPath="$HOME"/Bash-Script-Linux-DBMS-Project/DBMS
 clear
 # ---------------------------------------------------------------
@@ -12,6 +11,10 @@ function CreateDB {
 	then
 		echo "The Name of DB can not be empty ❗🙁"
 		return 1 # ==== break the function
+	elif [[ "$DBName" == *"*"* ]]
+	then
+		echo "$DBName this name can not be accepted ❌🙁"
+		return 1
 	fi
 	for DB in "$ProjectPath"/*
 	do

@@ -8,8 +8,8 @@ DBName="$3"
 #---------------------------------------------------------------
 ColumnNamesClean=() #== Store the names of column without the Data type
 function ListColumnsTable {
-	Header=$(head -n 1 "$TablePath")        #====  this Header has all columns of the table
-	IFS=':' read -ra Columns <<< "$Header"  #==== store each filed in array & remove (:)
+	Header=$(head -n 1 "$TablePath")      
+	IFS=':' read -ra Columns <<< "$Header"  
 	echo "=== Columns of $TableName Table  📊 ==="
 	echo "                                   "
 	Index=1
@@ -20,7 +20,7 @@ function ListColumnsTable {
                 ColName="${col%%(*}"
 		# Store in global array
                 ColumnNamesClean+=("$ColName")
-		echo "Col $Index) $col"
+		echo "Col $Index) 📊  $col"
 		((Index++))
 	done
 

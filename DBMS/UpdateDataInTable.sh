@@ -21,7 +21,7 @@ function ListColumnsTable {
                 ColName="${col%%(*}"
 		# Store in global array
                 ColumnNamesClean+=("$ColName")
-		echo "Col $Index) $col"
+		echo "Col $Index) 📊  $col"
 		((Index++))
 	done
 }
@@ -260,7 +260,7 @@ do
 	echo "5) Back                     	    "
 	echo "======================================"
 	echo "                                      "
-	read -p " Enter The Option Number  " Choice
+	read -p " Enter The Option Number : " Choice
 	case $Choice in
 		1) clear
 			UpdateByPK

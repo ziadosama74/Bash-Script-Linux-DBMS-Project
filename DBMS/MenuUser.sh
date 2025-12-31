@@ -37,14 +37,14 @@ function CreateTable {
 		echo " ---------------------------------"
 		echo " $TableName is not Accepted   ❌🙁"
 		echo " ---------------------------------"
-		sleep 2
+		sleep 1
 		clear
 	else
 		touch  "$DBPath/$TableName"
 		echo " -------------------------------------------"
 		echo " $TableName has been created successfully  ✅😉"
 		echo " -------------------------------------------"
-		sleep 2
+		sleep 1
 		clear
 		# Open Create table Scipt file
 		#---------------------------------
@@ -74,10 +74,10 @@ function ListAllTable {
 	 if [ "$FoundAny" -eq 0 ]
 	 then
 		  echo " No Tables Found   ❗🙁 "
-		  sleep 2
+		  sleep 1
 		  return 1
 	 fi
-	 sleep 2
+	 sleep 1
 	 return 0
 }
 #----------------------------------------------------------------
@@ -99,7 +99,7 @@ function DropTable {
         else
 		echo " $TableName Is Not Existed  ❗🙁"
         fi
-	sleep 2
+	sleep 1
 	clear
 }
 #----------------------------------------------------------------
@@ -108,7 +108,7 @@ function DropTable {
 function InsertDataAtTable {
 	if ! ListAllTable; then
                 echo " No Tables to Insert Data Into ❗🙁"
-                sleep 2
+                sleep 1
                 return 1
         fi
 	echo " ----------------------------------- "
@@ -117,7 +117,7 @@ function InsertDataAtTable {
 	if TableIsFound "$TableName"; then
                
                 echo " Now You Are Accessing $TableName Table  ✅"
-                sleep 2
+                sleep 1
 		clear
 		# Open Insert Data into table Scipt file
                 #---------------------------------------------
@@ -136,7 +136,7 @@ function InsertDataAtTable {
 function UpdateDataAtTable {
         if ! ListAllTable; then
                 echo " No Tables to Update Data Into ❗🙁"
-                sleep 2
+                sleep 1
                 return 1
         fi
         echo " ----------------------------------- "
@@ -145,7 +145,7 @@ function UpdateDataAtTable {
         if TableIsFound "$TableName"; then
 
                 echo " Now You Are Accessing $TableName Table  ✅"
-                sleep 2
+                sleep 1
                 clear
                 # Open Update Data into table Scipt file
                 #---------------------------------------------
@@ -154,7 +154,7 @@ function UpdateDataAtTable {
         else
                 echo " $TableName Is Not Existed ❗🙁"
         fi
-        sleep 2
+        sleep 1
         clear
 }
 
@@ -164,7 +164,7 @@ function UpdateDataAtTable {
 function SelectFromTable {
         if ! ListAllTable; then
                 echo " No Tables to Retrive Data from it ❗🙁"
-                sleep 2
+                sleep 1
                 return 1
         fi
         echo " ----------------------------------- "
@@ -173,7 +173,7 @@ function SelectFromTable {
         if TableIsFound "$TableName"; then
 
                 echo " Now You Are Accessing $TableName Table  ✅"
-                sleep 2
+                sleep 1
                 clear
                 # Open Select Data from  table Scipt file
                 #---------------------------------------------
@@ -182,7 +182,7 @@ function SelectFromTable {
         else
                 echo " $TableName Is Not Existed ❗🙁"
         fi
-        sleep 2
+        sleep 1
         clear
 }
 
@@ -192,7 +192,7 @@ function SelectFromTable {
 function DeleteFromTable {
         if ! ListAllTable; then
                 echo " No Tables to Delete Data from it ❗🙁"
-                sleep 2
+                sleep 1
                 return 1
         fi
         echo " ----------------------------------- "
@@ -201,7 +201,7 @@ function DeleteFromTable {
         if TableIsFound "$TableName"; then
 
                 echo " Now You Are Accessing $TableName Table  ✅"
-                sleep 2
+                sleep 1
                 clear
                 # Open Delete Data from table Scipt file
                 #---------------------------------------------
@@ -229,7 +229,7 @@ function AlterTable {
         if TableIsFound "$TableName"; then
 
                 echo " Now You Are Accessing $TableName Table  ✅"
-                sleep 2
+                sleep 1
                 clear
                 # Open Alter table Scipt file
                 #---------------------------------------------
@@ -285,7 +285,7 @@ do
 			AlterTable
 			;;
 		9) clear
-		       	exit 1
+		       	exit 0
 			;;
 		*) clear
 		       	echo "Invalid Option ❌"

@@ -1,7 +1,9 @@
 #!/bin/bash
 TablePath="$1"
 TableName="$2"
-DBName="$3"
+DBName="$3"elif [[ "$DBName" == *"*"* ]]
+	then
+		echo "$DBName this name can not be accepted ❌🙁"
 #---------------------------------------------------------------
 #                      Helper Functions
 #---------------------------------------------------------------
@@ -40,6 +42,9 @@ function AddNewColumn {
 		if [ -z "$ColName" ]
 		then
 			echo " Column name cannot be empty ❗🙁"
+		elif [[ "$ColName" == *"*"* ]]
+		then
+			echo "$ColName this name can not be accepted ❌🙁"
 		else
 			#=============================================
 			if [[ "$ColName" == +([0-9]) ]]
@@ -56,7 +61,7 @@ function AddNewColumn {
 				echo " Invalid column name format ❌🙁"
                         fi
 		fi
-		sleep 2
+		sleep 1
 	done
 	#=======================================
 	#      Select the Data type
@@ -117,7 +122,7 @@ function AddNewColumn {
         fi
 
 	echo " Column $ColName ($ColType) added successfully ✅😉"
-        sleep 3
+        sleep 1
 }
 #---------------------------------------------------------------
 #                      Drop Column Function
@@ -160,13 +165,13 @@ function DropColumn {
                                         printf "\n"
                                 }' "$TablePath" > "$TablePath.tmp" && mv "$TablePath.tmp" "$TablePath"
 				echo "Column $ColName has been dropped successfully ✅😉"
-				sleep 3
+				sleep 1
 				return 0
 			fi
 		done
 	fi
 	echo "$ColName Column is not Found in $TableName Table ❗🙁"
-	sleep 2
+	sleep 1
 	return 1
 
 }
@@ -197,7 +202,7 @@ function AlterColumn {
 
                                 if [ -z "$NewColName" ]; then
                                         echo " New column name cannot be empty ❗🙁"
-                                        sleep 2
+                                        sleep 1
                                         return 1
                                 fi
 
@@ -205,7 +210,7 @@ function AlterColumn {
                                 sed -i "1s/\b$Col\b/$NewColName/" "$TablePath"
 
                                 echo "The PK Column has been renamed from $Col to $NewColName successfully ✅😉"
-                                sleep 3
+                                sleep 1
                                 return 0
                         fi
 
@@ -214,7 +219,7 @@ function AlterColumn {
 
                         if [ -z "$NewColName" ]; then
                                 echo " New column name cannot be empty ❗🙁"
-                                sleep 2
+                                sleep 1
                                 return 1
                         fi
 
@@ -260,7 +265,7 @@ do
 			ListColumnsTable
 			;;
 		5) clear
-			exit 1
+			exit 0
 			;;
 		*) clear
 			echo "Invalid Option ❌"

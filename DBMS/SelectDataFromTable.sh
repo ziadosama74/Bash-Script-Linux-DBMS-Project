@@ -186,7 +186,6 @@ while true; do
         *)
             clear
             echo "Invalid Option ❌"
-            sleep 2
             ;;
     esac
 done
